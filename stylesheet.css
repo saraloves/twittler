@@ -1,0 +1,10 @@
+/*My attempt to style twittler*/
+
+.tweetbox {
+	color: BLUE;
+	font-family: Arial, Georgia, Helvetica;
+}
+
+#username {
+	font-weight: bold;
+}

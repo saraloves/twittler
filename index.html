@@ -3,6 +3,7 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link type="text/css" rel="stylesheet" href="stylesheet.css"/>
   </head>
   <body>
     <script>
@@ -11,14 +12,92 @@
         var $body = $('body');
         $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+          // var index = streams.home.length - 1;
+          // while(index >= 0){
+          //   var tweet = streams.home[index];
+          //   var $tweet = $('<div class="tweetbox"></div>');
+          //   $tweet.text('@' + tweet.user + ': ' + tweet.message + " " + tweet.created_at);
+          //   $tweet.appendTo($body);
+          //   index -= 1;
+          // }
+          console.log("Hello");
+          
+          var postNewTweets = function() {
+            var index = index || 0;
+              var doWork = function () {
+                if (streams.home.length - 1 > index) {
+                  for (var i = index; i<streams.home.length-1; i++) {
+                    var tweet = streams.home[i];
+                    var $tweet = $('<div class="tweetbox"></div>');
+                    var user = "@" + tweet.user;
+                    var $user = $('<div class ="tweetbox" id = "username" ></div>');
+                    $user.text(tweet.user);
+                    $tweet.text(tweet.message + " " + tweet.created_at);
+                    
+                    $user.appendTo($body);
+                    $tweet.appendTo($body);
+                index = streams.home.length-1;
+                return index;
+                }
+              } else {
+                console.log("Hello");
+              }
+            }
+              doWork();
+              setInterval(doWork, 500);
+          };
+
+
+          postNewTweets();
+
+          $('#username').on('click', function (){
+            $('.tweetbox').remove('tweetbox');
+            streams.users.$(this).appendTo($body);
+          });
+          // if (scheduleNextTweet()) {
+          //   console.log("hi");
+          // };
+          // setInterval(getTweets, 2000);
+
+        // if (currentState !== streams.home) {
+        //   while(index >= 0){
+        //     var currentState = streams.home;
+        //     var tweet = streams.home[index];
+        //     var $tweet = $('<div></div>');
+        //     $tweet.text('@' + tweet.user + ': ' + tweet.message);
+        //     $tweet.appendTo($body);
+        //     index -= 1;
+        //   }
+        // }
+
+        // function getTweets () {
+        //   var request = $.ajax({
+        //     type: "GET",
+        //     url: "data_generator.js"
+        //   });
+        // };
+        // getTweets();
+
+
+
+
+      // function getTweets () {
+      //   var request = $.ajax({
+      //     type: "GET",
+      //     url: "//localhost/Users/sarabinns/2013-11-twittler/data_generator.jss",
+      //     success: postToPage,
+      //     data: 'PlainObject',
+      //     order: "-createdAt"
+      //   });
+
+      //   function postToPage (){
+      //     console.log("Success!");
+      //     //var tweetHistory = JSON.parse(request.);
+      //   };
+
+      // };
+
+      // setTimeout(getTweets, 1000);
 
       });
 
