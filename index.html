@@ -13,14 +13,6 @@
         $body.html('<img src="http://bikeleague.org/sites/lab.huang.radicaldesigns.org/files/twittericon_0.png" width="80" height="80"></img><h1 class="tweetbox">Twittler</h1><div class="twittlerBody"></div>');
         var $twittlerBody = $('.twittlerBody');
 
-          // var index = streams.home.length - 1;
-          // while(index >= 0){
-          //   var tweet = streams.home[index];
-          //   var $tweet = $('<div class="tweetbox"></div>');
-          //   $tweet.text('@' + tweet.user + ': ' + tweet.message + " " + tweet.created_at);¥
-          //   $tweet.appendTo($body);
-          //   index -= 1;
-          // }
           
         var postNewTweets = function() {
           var index = index || streams.home.length - 1;
@@ -44,10 +36,7 @@
                 var username = userData.context.innerHTML;
                 $twittlerBody.remove();
                 userHistory(username);
-                // $('.tweetbox').remove('tweetbox');
-                //streams.users.$(this).closest.prependTo($body);
               });
-
 
               return index;
               }
@@ -72,56 +61,7 @@
         };
           
 
-          // $('.tweetbox').on('click', function(){
-          //   console.log("testing");
-          // });
-
-
-          // if (scheduleNextTweet()) {
-          //   console.log("hi");
-          // };
-          // setInterval(getTweets, 2000);
-
-        // if (currentState !== streams.home) {
-        //   while(index >= 0){
-        //     var currentState = streams.home;
-        //     var tweet = streams.home[index];
-        //     var $tweet = $('<div></div>');
-        //     $tweet.text('@' + tweet.user + ': ' + tweet.message);
-        //     $tweet.appendTo($body);
-        //     index -= 1;
-        //   }
-        // }
-
-        // function getTweets () {
-        //   var request = $.ajax({
-        //     type: "GET",
-        //     url: "data_generator.js"
-        //   });
-        // };
-        // getTweets();
-
-
-
-
-      // function getTweets () {
-      //   var request = $.ajax({
-      //     type: "GET",
-      //     url: "//localhost/Users/sarabinns/2013-11-twittler/data_generator.jss",
-      //     success: postToPage,
-      //     data: 'PlainObject',
-      //     order: "-createdAt"
-      //   });
-
-      //   function postToPage (){
-      //     console.log("Success!");
-      //     //var tweetHistory = JSON.parse(request.);
-      //   };
-
-      // };
-
-      // setTimeout(getTweets, 1000);
-
+ 
       });
     </script>
   </body>
