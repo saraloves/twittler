@@ -10,28 +10,29 @@
 
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('<img src="http://bikeleague.org/sites/lab.huang.radicaldesigns.org/files/twittericon_0.png" width="80" height="80"></img><h1 class="tweetbox">Twittler</h1><div class="twittlerBody"></div>');
+        $body.html('<img src="http://bikeleague.org/sites/lab.huang.radicaldesigns.org/files/twittericon_0.png" width="80" height="80"></img><h1 class="tweetbox">Twittler</h1><div class="twittlerBody"></div><div class="userHistory"></div>');
         var $twittlerBody = $('.twittlerBody');
+        var $userHistory = $('.userHistory');
 
           
         var postNewTweets = function() {
           var index = index || streams.home.length - 1;
             var doWork = function () {
               if (streams.home.length - 1 > index) {
-                for (var i = index; i<streams.home.length-1; i++) {
+                for (var i = index; i < streams.home.length - 1; i++) {
                   var tweet = streams.home[i];
                   var $tweet = $('<div class="tweetbox"></div>');
                   var user = "@" + tweet.user;
-                  var $user = $('<button class="tweetbox" id="username"></button>');
+                  var $user = $('<div class="tweetbox" id="username"></div>');
                   $user.text(tweet.user);
                   $tweet.text(tweet.message + " " + tweet.created_at);
 
                   $tweet.prependTo($twittlerBody);
                   $user.prependTo($twittlerBody);
                   
-              index = streams.home.length-1;
+              index = streams.home.length - 1;
 
-              $('button').on('click', function (){ 
+              $('#username').on('click', function (){ 
                 var userData = $(this).closest('user');
                 var username = userData.context.innerHTML;
                 $twittlerBody.remove();
@@ -42,8 +43,8 @@
               }
             } 
           }
-            doWork();
-            setInterval(doWork, 100);
+          doWork();
+          setInterval(doWork, 100);
             // $('.tweetbox').remove('tweetbox');
             //streams.users.$(this).prependTo($body);
         };
@@ -52,12 +53,21 @@
 
         var userHistory = function(username){
           var history = streams.users[username];
-          $body.append("<h3 class=tweetbox>" + username + "</h3>");
+          $('h1').append("<h6 class=tweetbox>" + username + "</h6>");
           for (var i = 0; i<history.length; i++) {
-            $body.append("<div class=tweetbox>" + history[i].message + " " + history[i].created_at + "</div>");
+            $userHistory.append("<div class=tweetbox>" + history[i].message + " " + history[i].created_at + "</div>");
           }
-          console.log(history);
-          //history.appendTo($body);
+          var index = index || history.length;
+          var updateHistory = function() {
+            if (streams.users[username].length > index) {
+              for (var i = index; i < streams.users[username].length - 1; i++) {
+              $userHistory.prepend("<div class=tweetbox>" + history[i].message + " " + history[i].created_at + "</div>");
+              }
+            }
+            index = streams.users[username].length - 1;
+            return index;
+          };
+          setInterval(updateHistory, 1000);
         };
           
 

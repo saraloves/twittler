@@ -6,4 +6,8 @@
 
 #username {
 	font-weight: bold;
+	cursor: pointer;
 }
+ #username:hover {
+ 	color: #7eb3cd;
+ }
